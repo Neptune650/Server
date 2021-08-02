@@ -197,25 +197,25 @@ namespace Server.Controllers
             Request.Headers.TryGetValue("Password", out passwordPre);
             string password = passwordPre.ToString();
             var users = Program.db.Table<UsersContainer.Users>();
-            string token = "";
             UsersContainer.Users user = users.ToList().Find(x => x.Email == email);
+                
+                if (user?.Email == email)
+                {
                 var argon2 = new Argon2id(Encoding.Default.GetBytes(password));
                 argon2.DegreeOfParallelism = 4;
                 argon2.MemorySize = 1024;
                 argon2.Iterations = 40;
                 argon2.Salt = user.Salt;
                 argon2.AssociatedData = new byte[] { };
-                if (user?.Email == email && BitConverter.ToString(user?.Password) == BitConverter.ToString(argon2.GetBytes(128)))
+                if(BitConverter.ToString(user?.Password) == BitConverter.ToString(argon2.GetBytes(128)))
                 {
-                    token = user.Token;
-                }
-                if (!String.IsNullOrEmpty(token))
-                {
+
                     return Ok(new Dictionary<string, object>{
                         { "Success", true },
-                        { "Token", token }
+                        { "Token", user.Token }
                     });
-                } else
+                }
+                else
                 {
                     return Unauthorized(new Dictionary<string, object>{
                         { "Success", false },
@@ -223,6 +223,15 @@ namespace Server.Controllers
                         { "Error", "Invalid information provided." }
                     });
                 }
+            }
+            else
+            {
+                return Unauthorized(new Dictionary<string, object>{
+                        { "Success", false },
+                        { "ErrorCode", 1 },
+                        { "Error", "Invalid information provided." }
+                    });
+            }
         }
 
         [HttpPost("register")]
