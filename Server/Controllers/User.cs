@@ -90,16 +90,16 @@ namespace Server.Controllers
             Request.Headers.TryGetValue("Authorization", out tokenPre);
             string token = tokenPre.ToString();
             Microsoft.Extensions.Primitives.StringValues emailPre;
-            Request.Headers.TryGetValue("email", out emailPre);
+            Request.Headers.TryGetValue("Email", out emailPre);
             string email = emailPre.ToString();
             Microsoft.Extensions.Primitives.StringValues passwordPre;
-            Request.Headers.TryGetValue("password", out passwordPre);
+            Request.Headers.TryGetValue("Password", out passwordPre);
             string password = passwordPre.ToString();
             Microsoft.Extensions.Primitives.StringValues usernamePre;
-            Request.Headers.TryGetValue("username", out usernamePre);
+            Request.Headers.TryGetValue("Username", out usernamePre);
             string username = usernamePre.ToString();
             Microsoft.Extensions.Primitives.StringValues usernumberPre;
-            Request.Headers.TryGetValue("usernumber", out usernumberPre);
+            Request.Headers.TryGetValue("Usernumber", out usernumberPre);
             string usernumber = usernumberPre.ToString();
             var users = Program.db.Table<UsersContainer.Users>();
             UsersContainer.Users user = users.ToList().Find(x => x.Token == token);
@@ -191,10 +191,10 @@ namespace Server.Controllers
         public IActionResult Login()
         {
             Microsoft.Extensions.Primitives.StringValues emailPre;
-            Request.Headers.TryGetValue("email", out emailPre);
+            Request.Headers.TryGetValue("Email", out emailPre);
             string email = emailPre.ToString();
             Microsoft.Extensions.Primitives.StringValues passwordPre;
-            Request.Headers.TryGetValue("password", out passwordPre);
+            Request.Headers.TryGetValue("Password", out passwordPre);
             string password = passwordPre.ToString();
             var users = Program.db.Table<UsersContainer.Users>();
             string token = "";
@@ -229,16 +229,16 @@ namespace Server.Controllers
         public IActionResult Register()
         {
             Microsoft.Extensions.Primitives.StringValues emailPre;
-            Request.Headers.TryGetValue("email", out emailPre);
+            Request.Headers.TryGetValue("Email", out emailPre);
             string email = emailPre.ToString();
             Microsoft.Extensions.Primitives.StringValues usernamePre;
-            Request.Headers.TryGetValue("username", out usernamePre);
+            Request.Headers.TryGetValue("Username", out usernamePre);
             string username = usernamePre.ToString();
             Microsoft.Extensions.Primitives.StringValues usernumberPre;
-            Request.Headers.TryGetValue("usernumber", out usernumberPre);
+            Request.Headers.TryGetValue("Usernumber", out usernumberPre);
             string usernumber = usernumberPre.ToString();
             Microsoft.Extensions.Primitives.StringValues passwordPre;
-            Request.Headers.TryGetValue("password", out passwordPre);
+            Request.Headers.TryGetValue("Password", out passwordPre);
             string password = passwordPre.ToString();
             if(isEmail(email) && username.Length < 31 && int.TryParse(usernumber, out _) && usernumber.Length == 4 && usernumber != "0000" && !String.IsNullOrEmpty(password))
             {

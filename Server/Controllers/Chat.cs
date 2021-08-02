@@ -67,7 +67,7 @@ namespace Server.Controllers
             Request.Headers.TryGetValue("Authorization", out tokenPre);
             string token = tokenPre.ToString();
             Microsoft.Extensions.Primitives.StringValues namePre;
-            Request.Headers.TryGetValue("name", out namePre);
+            Request.Headers.TryGetValue("Name", out namePre);
             string name = namePre.ToString();
             var groups = Program.db.Table<GroupsContainer.Groups>();
             GroupsContainer.Groups group = groups.ToList().Find(x => x.Id == gid);
@@ -126,7 +126,7 @@ namespace Server.Controllers
             Request.Headers.TryGetValue("Authorization", out tokenPre);
             string token = tokenPre.ToString();
             Microsoft.Extensions.Primitives.StringValues namePre;
-            Request.Headers.TryGetValue("name", out namePre);
+            Request.Headers.TryGetValue("Name", out namePre);
             string name = namePre.ToString();
             var users = Program.db.Table<UsersContainer.Users>();
             UsersContainer.Users user = users.ToList().Find(x => x.Token == token);

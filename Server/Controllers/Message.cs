@@ -89,7 +89,7 @@ namespace Server.Controllers
             Request.Headers.TryGetValue("Authorization", out tokenPre);
             string token = tokenPre.ToString();
             Microsoft.Extensions.Primitives.StringValues messagePre;
-            Request.Headers.TryGetValue("message", out messagePre);
+            Request.Headers.TryGetValue("Message", out messagePre);
             string message = messagePre.ToString();
             var users = Program.db.Table<UsersContainer.Users>();
             UsersContainer.Users user = users.ToList().Find(x => x.Token == token);
@@ -153,7 +153,7 @@ namespace Server.Controllers
             Request.Headers.TryGetValue("Authorization", out tokenPre);
             string token = tokenPre.ToString();
             Microsoft.Extensions.Primitives.StringValues messagePre;
-            Request.Headers.TryGetValue("message", out messagePre);
+            Request.Headers.TryGetValue("Message", out messagePre);
             string message = messagePre.ToString();
             var users = Program.db.Table<UsersContainer.Users>();
             UsersContainer.Users user = users.ToList().Find(x => x.Token == token);

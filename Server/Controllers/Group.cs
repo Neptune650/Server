@@ -78,7 +78,7 @@ namespace Server.Controllers
             Request.Headers.TryGetValue("Authorization", out tokenPre);
             string token = tokenPre.ToString();
             Microsoft.Extensions.Primitives.StringValues namePre;
-            Request.Headers.TryGetValue("name", out namePre);
+            Request.Headers.TryGetValue("Name", out namePre);
             string name = namePre.ToString();
             var users = Program.db.Table<UsersContainer.Users>();
             UsersContainer.Users user = users.ToList().Find(x => x.Token == token);
@@ -148,10 +148,10 @@ namespace Server.Controllers
             Request.Headers.TryGetValue("Authorization", out tokenPre);
             string token = tokenPre.ToString();
             Microsoft.Extensions.Primitives.StringValues namePre;
-            Request.Headers.TryGetValue("name", out namePre);
+            Request.Headers.TryGetValue("Name", out namePre);
             string name = namePre.ToString();
             Microsoft.Extensions.Primitives.StringValues ownerPre;
-            Request.Headers.TryGetValue("owner", out ownerPre);
+            Request.Headers.TryGetValue("Owner", out ownerPre);
             string owner = ownerPre.ToString();
             var users = Program.db.Table<UsersContainer.Users>();
             UsersContainer.Users user = users.ToList().Find(x => x.Token == token);
