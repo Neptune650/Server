@@ -115,7 +115,7 @@ namespace Server.Controllers
                     Program.db.Update(user);
 
                     WebsocketObject6Container.Groups websocketObject = new WebsocketObject6Container.Groups();
-                    websocketObject.Event = 0;
+                    websocketObject.Event = 1;
                     websocketObject.Id = group.Id;
                     websocketObject.Name = group.Name;
                     _hubContext.Clients.Group(group.Id).SendAsync("JoinedGroup", websocketObject);
@@ -176,7 +176,7 @@ namespace Server.Controllers
                             groupSuccess.Members = JsonConvert.DeserializeObject<List<string>>(group.Members);
 
                         WebsocketObject7Container.Groups websocketObject = new WebsocketObject7Container.Groups();
-                        websocketObject.Event = 0;
+                        websocketObject.Event = 2;
                         websocketObject.Id = group.Id;
                         websocketObject.Name = group.Name;
                         websocketObject.Owner = group.Owner;
@@ -238,7 +238,7 @@ namespace Server.Controllers
                     groupObjectified.Members = JsonConvert.DeserializeObject<List<string>>(group.Members);
 
                     WebsocketObject8Container.Groups websocketObject = new WebsocketObject8Container.Groups();
-                    websocketObject.Event = 0;
+                    websocketObject.Event = 4;
                     websocketObject.Id = group.Id;
                     _hubContext.Clients.Group(group.Id).SendAsync("DeletedGroup", websocketObject);
                     return Ok(groupObjectified);

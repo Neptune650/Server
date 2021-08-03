@@ -93,7 +93,7 @@ namespace Server.Controllers
                     chatSuccess.Name = chat.Name;
 
                     WebsocketObject4Container.Chat websocketObject = new WebsocketObject4Container.Chat();
-                    websocketObject.Event = 0;
+                    websocketObject.Event = 5;
                     websocketObject.Id = chat.Id;
                     websocketObject.Name = chat.Name;
                     _hubContext.Clients.Group(group.Id).SendAsync("NewChat", websocketObject);
@@ -150,7 +150,7 @@ namespace Server.Controllers
                         chatSuccess.Name = chat.Name;
 
                         WebsocketObject4Container.Chat websocketObject = new WebsocketObject4Container.Chat();
-                        websocketObject.Event = 0;
+                        websocketObject.Event = 6;
                         websocketObject.Id = chat.Id;
                         websocketObject.Name = chat.Name;
                         _hubContext.Clients.Group(group.Id).SendAsync("EditedChat", websocketObject);
@@ -214,7 +214,7 @@ namespace Server.Controllers
                         chatSuccess.Name = chat.Name;
 
                         WebsocketObject5Container.Chat websocketObject = new WebsocketObject5Container.Chat();
-                        websocketObject.Event = 0;
+                        websocketObject.Event = 7;
                         websocketObject.Id = chat.Id;
                         _hubContext.Clients.Group(group.Id).SendAsync("DeletedChat", websocketObject);
 

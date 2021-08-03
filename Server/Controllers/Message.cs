@@ -113,7 +113,7 @@ namespace Server.Controllers
                     messageSuccess.Success = true;
                     messageSuccess.Message = messageObject;
                     WebsocketObjectContainer.Message websocketObject = new WebsocketObjectContainer.Message();
-                    websocketObject.Event = 0;
+                    websocketObject.Event = 8;
                     websocketObject.Id = messageObject.Id;
                     websocketObject.Content = messageObject.Content;
                     nPI2UserContainer.Users nPIUser = new nPI2UserContainer.Users();
@@ -174,7 +174,7 @@ namespace Server.Controllers
                     messageSuccess.Success = true;
                     messageSuccess.Message = messageThingy;
                     WebsocketObject2Container.Message websocketObject = new WebsocketObject2Container.Message();
-                    websocketObject.Event = 0;
+                    websocketObject.Event = 9;
                     websocketObject.Id = messageObject.Id;
                     websocketObject.Content = messageObject.Content;
                     _hubContext.Clients.Group(chat.Id).SendAsync("EditedMessage", websocketObject);
@@ -226,7 +226,7 @@ namespace Server.Controllers
                     messageSuccess.Success = true;
                     messageSuccess.Message = messageObject;
                     WebsocketObject2Container.Message websocketObject = new WebsocketObject2Container.Message();
-                    websocketObject.Event = 0;
+                    websocketObject.Event = 10;
                     websocketObject.Id = messageObject.Id;
                     _hubContext.Clients.Group(chat.Id).SendAsync("DeletedMessage", websocketObject);
                     return Ok(messageSuccess);
