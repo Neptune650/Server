@@ -44,18 +44,18 @@ namespace Server.Controllers
                 else
                 {
                     return Unauthorized(new Dictionary<string, object>{
-                        { "Success", false },
-                        { "ErrorCode", 1 },
-                        { "Error", "Invalid information provided." }
+                        { "success", false },
+                        { "errorCode", 1 },
+                        { "error", "Invalid information provided." }
                     });
                 }
             }
             else
             {
                 return Unauthorized(new Dictionary<string, object>{
-                        { "Success", false },
-                        { "ErrorCode", 1 },
-                        { "Error", "Invalid token." }
+                        { "success", false },
+                        { "errorCode", 1 },
+                        { "error", "Invalid token." }
                     });
             }
         }
@@ -103,18 +103,18 @@ namespace Server.Controllers
                 else
                 {
                     return BadRequest(new Dictionary<string, object>{
-                        { "Success", false },
-                        { "ErrorCode", 1 },
-                        { "Error", "Invalid information provided." }
+                        { "success", false },
+                        { "errorCode", 1 },
+                        { "error", "Invalid information provided." }
                     });
                 }
             }
             else
             {
                 return Unauthorized(new Dictionary<string, object>{
-                        { "Success", false },
-                        { "ErrorCode", 1 },
-                        { "Error", "Invalid token." }
+                        { "success", false },
+                        { "errorCode", 1 },
+                        { "error", "Invalid token." }
                     });
             }
         }
@@ -160,18 +160,18 @@ namespace Server.Controllers
                     else
                     {
                         return Unauthorized(new Dictionary<string, object>{
-                        { "Success", false },
-                        { "ErrorCode", 1 },
-                        { "Error", "Invalid information provided." }
+                        { "success", false },
+                        { "errorCode", 1 },
+                        { "error", "Invalid information provided." }
                     });
                     }
                 }
                 else
                 {
                     return Unauthorized(new Dictionary<string, object>{
-                        { "Success", false },
-                        { "ErrorCode", 1 },
-                        { "Error", "You don't own this group." }
+                        { "success", false },
+                        { "errorCode", 1 },
+                        { "error", "You don't own this group." }
                     });
                 }
 
@@ -179,9 +179,9 @@ namespace Server.Controllers
             else
             {
                 return Unauthorized(new Dictionary<string, object>{
-                        { "Success", false },
-                        { "ErrorCode", 1 },
-                        { "Error", "Invalid token." }
+                        { "success", false },
+                        { "errorCode", 1 },
+                        { "error", "Invalid token." }
                     });
             }
         }
@@ -223,18 +223,18 @@ namespace Server.Controllers
                     else
                     {
                         return Unauthorized(new Dictionary<string, object>{
-                        { "Success", false },
-                        { "ErrorCode", 1 },
-                        { "Error", "Invalid information provided." }
+                        { "success", false },
+                        { "errorCode", 1 },
+                        { "error", "Invalid information provided." }
                     });
                     }
                 }
                 else
                 {
                     return Unauthorized(new Dictionary<string, object>{
-                        { "Success", false },
-                        { "ErrorCode", 1 },
-                        { "Error", "You don't own this group." }
+                        { "success", false },
+                        { "errorCode", 1 },
+                        { "error", "You don't own this group." }
                     });
                 }
 
@@ -242,9 +242,9 @@ namespace Server.Controllers
             else
             {
                 return Unauthorized(new Dictionary<string, object>{
-                        { "Success", false },
-                        { "ErrorCode", 1 },
-                        { "Error", "Invalid token." }
+                        { "success", false },
+                        { "errorCode", 1 },
+                        { "error", "Invalid token." }
                     });
             }
         }
