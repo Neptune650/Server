@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Server.Hubs;
 
 namespace Server
@@ -39,6 +41,17 @@ namespace Server
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStatusCodePages(async context =>
+            {
+                context.HttpContext.Response.ContentType = "application/json";
+
+                await context.HttpContext.Response.WriteAsync(JsonConvert.SerializeObject(new Dictionary<string, object>{
+                        { "success", false },
+                        { "errorCode", context.HttpContext.Response.StatusCode },
+                        { "error", context.HttpContext.Response.StatusCode }
+                    }));
+            });
 
             app.UseHttpsRedirection();
 
