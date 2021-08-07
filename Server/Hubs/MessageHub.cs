@@ -7,7 +7,7 @@ namespace Server.Hubs
 {
     public class MessageHub : Hub
     {
-        public override async Task OnConnectedAsync()
+        public override async Task OnConnectedAsync()   
         {
             var users = Program.db.Table<UsersContainer.Users>();
             string token = Context.GetHttpContext().Request.Query["access_token"];

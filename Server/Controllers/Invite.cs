@@ -70,49 +70,58 @@ namespace Server.Controllers
             {
                 List<string> userGroups = JsonConvert.DeserializeObject<List<string>>(user.Groups);
                 var invites = Program.db.Table<InvitesContainer.Invites>();
-                string id = invites.ToList().Find(x => x.Code == code).Group;
-                if (!userGroups.Contains(id))
-                {
-                    userGroups.Add(id);
-                    user.Groups = JsonConvert.SerializeObject(userGroups);
-                    Program.db.Update(user);
-                    var groups = Program.db.Table<GroupsContainer.Groups>();
-                    GroupsContainer.Groups group = groups.ToList().Find(x => x.Id == id);
-                    List<string> members = JsonConvert.DeserializeObject<List<string>>(group.Members);
-                    members.Add(user.Id);
-                    group.Members = JsonConvert.SerializeObject(members);
-                    Program.db.Update(group);
+                string id = invites.ToList().Find(x => x.Code == code)?.Group;
+                if (!String.IsNullOrEmpty(id)) { 
+                    if (!userGroups.Contains(id))
+                    {
+                        userGroups.Add(id);
+                        user.Groups = JsonConvert.SerializeObject(userGroups);
+                        Program.db.Update(user);
+                        var groups = Program.db.Table<GroupsContainer.Groups>();
+                        GroupsContainer.Groups group = groups.ToList().Find(x => x.Id == id);
+                        List<string> members = JsonConvert.DeserializeObject<List<string>>(group.Members);
+                        members.Add(user.Id);
+                        group.Members = JsonConvert.SerializeObject(members);
+                        Program.db.Update(group);
 
-                    GroupsContainerSuccess.Groups groupSuccess = new GroupsContainerSuccess.Groups();
-                    groupSuccess.Success = true;
-                    groupSuccess.Id = group.Id;
-                    groupSuccess.Name = group.Name;
-                    groupSuccess.Owner = group.Owner;
-                    List<GroupsContainerObjectified.Chat> chats = JsonConvert.DeserializeObject<List<GroupsContainerObjectified.Chat>>(group.Chats);
-                    List<GroupsContainerSuccess.Chat> chats2 = new List<GroupsContainerSuccess.Chat>();
-                    chats.ForEach(x => {
-                        GroupsContainerSuccess.Chat chat = new GroupsContainerSuccess.Chat();
-                        chat.Id = x.Id;
-                        chat.Name = x.Name;
-                        chats2.Add(chat);
-                    });
-                    groupSuccess.Chats = chats2;
-                    groupSuccess.Members = JsonConvert.DeserializeObject<List<string>>(group.Members);
+                        GroupsContainerSuccess.Groups groupSuccess = new GroupsContainerSuccess.Groups();
+                        groupSuccess.Success = true;
+                        groupSuccess.Id = group.Id;
+                        groupSuccess.Name = group.Name;
+                        groupSuccess.Owner = group.Owner;
+                        List<GroupsContainerObjectified.Chat> chats = JsonConvert.DeserializeObject<List<GroupsContainerObjectified.Chat>>(group.Chats);
+                        List<GroupsContainerSuccess.Chat> chats2 = new List<GroupsContainerSuccess.Chat>();
+                        chats.ForEach(x => {
+                            GroupsContainerSuccess.Chat chat = new GroupsContainerSuccess.Chat();
+                            chat.Id = x.Id;
+                            chat.Name = x.Name;
+                            chats2.Add(chat);
+                        });
+                        groupSuccess.Chats = chats2;
+                        groupSuccess.Members = JsonConvert.DeserializeObject<List<string>>(group.Members);
 
-                    WebsocketObject6Container.Groups websocketObject = new WebsocketObject6Container.Groups();
-                    websocketObject.Event = 0;
-                    websocketObject.Id = group.Id;
-                    websocketObject.Name = group.Name;
-                    _hubContext.Clients.Group(user.Id).SendAsync("JoinedGroup", websocketObject);
+                        WebsocketObject6Container.Groups websocketObject = new WebsocketObject6Container.Groups();
+                        websocketObject.Event = 0;
+                        websocketObject.Id = group.Id;
+                        websocketObject.Name = group.Name;
+                        _hubContext.Clients.Group(user.Id).SendAsync("JoinedGroup", websocketObject);
 
-                    return Ok(groupSuccess);
-                }
-                else
-                {
-                    return Unauthorized(new Dictionary<string, object>{
+                        return Ok(groupSuccess);
+                    }
+                    else
+                    {
+                        return Unauthorized(new Dictionary<string, object>{
                         { "success", false },
                         { "errorCode", 1 },
                         { "error", "You already are in this group." }
+                    });
+                    }
+            } else
+            {
+                    return Unauthorized(new Dictionary<string, object>{
+                        { "success", false },
+                        { "errorCode", 1 },
+                        { "error", "Invalid information provided." }
                     });
                 }
             }
