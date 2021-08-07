@@ -13,9 +13,9 @@ namespace Server.Controllers
     [Route("api/[controller]")]
     public class Invite : Controller
     {
-        private readonly IHubContext<Hubs.MessageHub> _hubContext;
+        private readonly IHubContext<Hubs.SignalR> _hubContext;
 
-        public Invite(IHubContext<Hubs.MessageHub> hubContext)
+        public Invite(IHubContext<Hubs.SignalR> hubContext)
         {
             _hubContext = hubContext;
         }

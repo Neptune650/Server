@@ -13,9 +13,9 @@ namespace Server.Controllers
     [Route("api/group/{gid}/chat/{cid}/[controller]")]
     public class Message : Controller
     {
-        private readonly IHubContext<Hubs.MessageHub> _hubContext;
+        private readonly IHubContext<Hubs.SignalR> _hubContext;
 
-        public Message(IHubContext<Hubs.MessageHub> hubContext)
+        public Message(IHubContext<Hubs.SignalR> hubContext)
         {
             _hubContext = hubContext;
         }

@@ -14,9 +14,9 @@ namespace Server.Controllers
     public class Group : Controller
     {
 
-        private readonly IHubContext<Hubs.MessageHub> _hubContext;
+        private readonly IHubContext<Hubs.SignalR> _hubContext;
 
-        public Group(IHubContext<Hubs.MessageHub> hubContext)
+        public Group(IHubContext<Hubs.SignalR> hubContext)
         {
             _hubContext = hubContext;
         }
