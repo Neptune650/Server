@@ -64,7 +64,7 @@ namespace Server
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<MessageHub>("/messagehub");
+                endpoints.MapHub<SignalR>("/signalr");
             });
         }
     }

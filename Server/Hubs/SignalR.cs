@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Server.Hubs
 {
-    public class MessageHub : Hub
+    public class SignalR : Hub
     {
         public override async Task OnConnectedAsync()   
         {
