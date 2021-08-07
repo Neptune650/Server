@@ -14,14 +14,13 @@ namespace Server.Hubs
             if (String.IsNullOrEmpty(users.ToList().Find(x => x.Token == token)?.Id))
             {
                 Context.Abort();
+            } else
+            {
+                await Groups.AddToGroupAsync(Context.ConnectionId, users.ToList().Find(x => x.Token == token).Id);
             }
             await base.OnConnectedAsync();
         }
 
-        public async Task Login(string user)
-        {
-            await Groups.AddToGroupAsync(Context.ConnectionId, user);
-        }
 
         public async Task ChangeToGroup(string oldGroup, string newGroup)
         {

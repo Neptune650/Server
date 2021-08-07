@@ -118,7 +118,7 @@ namespace Server.Controllers
                     websocketObject.Event = 1;
                     websocketObject.Id = group.Id;
                     websocketObject.Name = group.Name;
-                    _hubContext.Clients.Group(group.Id).SendAsync("JoinedGroup", websocketObject);
+                    _hubContext.Clients.Group(user.Id).SendAsync("JoinedGroup", websocketObject);
 
                     return Ok(groupObjectified);
                 }
