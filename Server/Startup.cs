@@ -49,7 +49,7 @@ namespace Server
                 await context.HttpContext.Response.WriteAsync(JsonConvert.SerializeObject(new Dictionary<string, object>{
                         { "success", false },
                         { "errorCode", context.HttpContext.Response.StatusCode },
-                        { "error", context.HttpContext.Response.StatusCode }
+                        { "error", context.HttpContext.Response.StatusCode.ToString() }
                     }));
             });
 
