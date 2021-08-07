@@ -66,7 +66,6 @@ public class WebsocketObjectContainer
 
     public class Message
     {
-        public int Event { get; set; }
         public string Id { get; set; }
         public string Content { get; set; }
         public nPI2UserContainer.Users Author { get; set; }
@@ -78,7 +77,6 @@ public class WebsocketObject2Container
 
     public class Message
     {
-        public int Event { get; set; }
         public string Id { get; set; }
         public string Content { get; set; }
     }
@@ -89,7 +87,6 @@ public class WebsocketObject3Container
 
     public class Message
     {
-        public int Event { get; set; }
         public string Id { get; set; }
     }
 }
@@ -99,7 +96,6 @@ public class WebsocketObject4Container
 
     public class Chat
     {
-        public int Event { get; set; }
         public string Id { get; set; }
         public string Name { get; set; }
     }
@@ -110,7 +106,6 @@ public class WebsocketObject5Container
 
     public class Chat
     {
-        public int Event { get; set; }
         public string Id { get; set; }
     }
 }
@@ -125,7 +120,6 @@ public class WebsocketObject6Container
 
     public class Groups
     {
-        public int Event { get; set; }
         public string Id { get; set; }
         public string Name { get; set; }
     }
@@ -136,7 +130,6 @@ public class WebsocketObject7Container
 
     public class Groups
     {
-        public int Event { get; set; }
         public string Id { get; set; }
         public string Name { get; set; }
         public string Owner { get; set; }
@@ -148,7 +141,6 @@ public class WebsocketObject8Container
 
     public class Groups
     {
-        public int Event { get; set; }
         public string Id { get; set; }
     }
 }

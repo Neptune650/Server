@@ -101,7 +101,6 @@ namespace Server.Controllers
                         groupSuccess.Members = JsonConvert.DeserializeObject<List<string>>(group.Members);
 
                         WebsocketObject6Container.Groups websocketObject = new WebsocketObject6Container.Groups();
-                        websocketObject.Event = 0;
                         websocketObject.Id = group.Id;
                         websocketObject.Name = group.Name;
                         _hubContext.Clients.Group(user.Id).SendAsync("JoinedGroup", websocketObject);
