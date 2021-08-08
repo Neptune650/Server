@@ -119,7 +119,22 @@ namespace Server.Controllers
                     websocketObject.Name = group.Name;
                     _hubContext.Clients.Group(user.Id).SendAsync("JoinedGroup", websocketObject);
 
-                    return Ok(groupObjectified);
+                    GroupsContainerSuccess.Groups groupSuccess = new GroupsContainerSuccess.Groups();
+                    groupSuccess.Success = true;
+                    groupSuccess.Id = group.Id;
+                    groupSuccess.Name = group.Name;
+                    groupSuccess.Owner = group.Owner;
+                    List<GroupsContainerSuccess.Chat> chats2 = new List<GroupsContainerSuccess.Chat>();
+                    chats.ForEach(x => {
+                        GroupsContainerSuccess.Chat chat = new GroupsContainerSuccess.Chat();
+                        chat.Id = x.Id;
+                        chat.Name = x.Name;
+                        chats2.Add(chat);
+                    });
+                    groupSuccess.Chats = chats2;
+                    groupSuccess.Members = JsonConvert.DeserializeObject<List<string>>(group.Members);
+
+                    return Ok(groupSuccess);
                 }
                 else
                 {
