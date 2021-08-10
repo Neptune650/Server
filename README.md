@@ -9,3 +9,8 @@
 
 ### Using
 You need a client for this, we will release one soon!
+
+### Credits
+
+Thanks to:
+@Sebastian-byte - Helping A LOT
