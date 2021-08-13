@@ -56,7 +56,7 @@ namespace Server.Controllers
                 {
                     return Unauthorized(new Dictionary<string, object>{
                         { "success", false },
-                        { "errorCode", 1 },
+                        { "errorCode", 2 },
                         { "error", "Invalid information provided." }
                     });
                 }
@@ -65,7 +65,7 @@ namespace Server.Controllers
             {
                 return Unauthorized(new Dictionary<string, object>{
                         { "success", false },
-                        { "errorCode", 1 },
+                        { "errorCode", 3 },
                         { "error", "Invalid token." }
                     });
             }
@@ -140,7 +140,7 @@ namespace Server.Controllers
                 {
                     return BadRequest(new Dictionary<string, object>{
                         { "success", false },
-                        { "errorCode", 1 },
+                        { "errorCode", 2 },
                         { "error", "Invalid information provided." }
                     });
                 }
@@ -149,7 +149,7 @@ namespace Server.Controllers
             {
                 return Unauthorized(new Dictionary<string, object>{
                         { "success", false },
-                        { "errorCode", 1 },
+                        { "errorCode", 3 },
                         { "error", "Invalid token." }
                     });
             }
@@ -201,7 +201,7 @@ namespace Server.Controllers
                         {
                             return Unauthorized(new Dictionary<string, object>{
                         { "success", false },
-                        { "errorCode", 1 },
+                        { "errorCode", 2 },
                         { "error", "Invalid information provided." }
                     });
                         }
@@ -211,7 +211,7 @@ namespace Server.Controllers
                 {
                     return Unauthorized(new Dictionary<string, object>{
                         { "success", false },
-                        { "errorCode", 1 },
+                        { "errorCode", 2 },
                         { "error", "You don't own this group." }
                     });
                 }
@@ -221,7 +221,7 @@ namespace Server.Controllers
             {
                 return Unauthorized(new Dictionary<string, object>{
                         { "success", false },
-                        { "errorCode", 1 },
+                        { "errorCode", 3 },
                         { "error", "Invalid token." }
                     });
             }
@@ -259,7 +259,7 @@ namespace Server.Controllers
                 {
                     return Unauthorized(new Dictionary<string, object>{
                         { "success", false },
-                        { "errorCode", 1 },
+                        { "errorCode", 2 },
                         { "error", "You don't own this group." }
                     });
                 }
@@ -269,7 +269,7 @@ namespace Server.Controllers
             {
                 return Unauthorized(new Dictionary<string, object>{
                         { "success", false },
-                        { "errorCode", 1 },
+                        { "errorCode", 3 },
                         { "error", "Invalid token." }
                     });
             }
@@ -312,7 +312,7 @@ namespace Server.Controllers
             {
                 return Unauthorized(new Dictionary<string, object>{
                         { "success", false },
-                        { "errorCode", 1 },
+                        { "errorCode", 3 },
                         { "error", "Invalid token." }
                     });
             }
@@ -376,7 +376,7 @@ namespace Server.Controllers
             {
                 return Unauthorized(new Dictionary<string, object>{
                         { "success", false },
-                        { "errorCode", 1 },
+                        { "errorCode", 3 },
                         { "error", "Invalid token." }
                     });
             }
