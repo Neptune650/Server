@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class Invite : Controller
     {
         private readonly IHubContext<Hubs.SignalR> _hubContext;

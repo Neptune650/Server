@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace Server.Controllers
 {
-    [Route("api/group/{gid}/chat/{cid}/[controller]")]
+    [Route("group/{gid}/chat/{cid}/[controller]")]
     public class Message : Controller
     {
         private readonly IHubContext<Hubs.SignalR> _hubContext;

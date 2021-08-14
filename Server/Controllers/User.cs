@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 namespace Server.Controllers
 {
 
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class User : Controller
     {
         [HttpGet]
