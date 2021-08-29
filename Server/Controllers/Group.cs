@@ -319,7 +319,7 @@ namespace Server.Controllers
         }
 
         [HttpPost("{id}/leave")]
-        public IActionResult Leave(string id)
+        public async Task<IActionResult> LeaveAsync(string id)
         {
             Microsoft.Extensions.Primitives.StringValues tokenPre;
             Request.Headers.TryGetValue("Authorization", out tokenPre);
@@ -359,7 +359,10 @@ namespace Server.Controllers
 
                     WebsocketObject8Container.Groups websocketObject = new WebsocketObject8Container.Groups();
                     websocketObject.Id = group.Id;
-                    _hubContext.Clients.Group(user.Id).SendAsync("LeftGroup", websocketObject);
+                    foreach (string groupMember in Hubs.SignalR.usersDictionary.Values) {
+                        await _hubContext.Groups.RemoveFromGroupAsync(groupMember, group.Id);
+                    }
+                    await _hubContext.Clients.Group(user.Id).SendAsync("LeftGroup", websocketObject);
 
                     return Ok(groupSuccess);
                 }

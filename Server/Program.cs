@@ -255,7 +255,7 @@ namespace Server
             db.CreateTable<GroupsContainer.Groups>();
             db.CreateTable<InvitesContainer.Invites>();
 
-            CreateHostBuilder(args).Build().Run();
+                CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

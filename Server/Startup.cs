@@ -68,9 +68,9 @@ namespace Server
 
             app.UseCors(CORS);
 
-            app.UseAuthorization();
-
             app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
