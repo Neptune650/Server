@@ -147,6 +147,20 @@ public class WebsocketObject8Container
 
 public class GroupsContainerObjectified
 {
+        public class Author
+        {
+            public string Id { get; set; }
+            public string Username { get; set; }
+            public string Usernumber { get; set; }
+        }
+
+        public class Message2
+    {
+        public string Id { get; set; }
+        public string Content { get; set; }
+        public Author Author { get; set; }
+    }
+
     public class Message
     {
         public string Id { get; set; }
@@ -173,16 +187,30 @@ public class GroupsContainerObjectified
 
 public class GroupsContainerSuccess
 {
+    public class Author
+    {
+        public string Id { get; set; }
+        public string Username { get; set; }
+        public string Usernumber { get; set; }
+    }
+
     public class MessageSuccess
     {
         public bool Success { get; set; }
         public GroupsContainerObjectified.Message Message { get; set; }
     }
 
+
+    public class MessageSuccess2
+    {
+        public bool Success { get; set; }
+        public GroupsContainerObjectified.Message2 Message { get; set; }
+    }
+
     public class MessagesSuccess
     {
         public bool Success { get; set; }
-        public List<GroupsContainerObjectified.Message> Messages { get; set; }
+        public List<GroupsContainerObjectified.Message2> Messages { get; set; }
     }
 
     public class Chat

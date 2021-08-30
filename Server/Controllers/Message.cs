@@ -38,16 +38,34 @@ namespace Server.Controllers
                 {
                     GroupsContainerSuccess.MessagesSuccess messagesSuccess = new GroupsContainerSuccess.MessagesSuccess();
                     messagesSuccess.Success = true;
-                    messagesSuccess.Messages = chat.Messages;
+                        List<GroupsContainerObjectified.Message2> realMessages = new List <GroupsContainerObjectified.Message2>();
+                        chat.Messages.ForEach(message => {
+                            GroupsContainerObjectified.Message2 realMessage = new GroupsContainerObjectified.Message2();
+                            realMessage.Id = message.Id;
+                            realMessage.Content = message.Content;
+                            realMessage.Author = new GroupsContainerObjectified.Author();
+                            realMessage.Author.Id = message.Author;
+                            realMessage.Author.Username = users.ToList().Find(x => x.Id == realMessage.Author.Id)?.Username ?? "Deleted User";
+                            realMessage.Author.Usernumber = users.ToList().Find(x => x.Id == realMessage.Author.Id)?.Usernumber ?? "0000";
+                            realMessages.Add(realMessage);
+                        });
+                    messagesSuccess.Messages = realMessages;
                     return Ok(messagesSuccess);
                 } else
                 {
                         GroupsContainerObjectified.Message message = chat.Messages.Find(x => x.Id == mid);
                     if (!String.IsNullOrEmpty(message?.Id))
                         {
-                            GroupsContainerSuccess.MessageSuccess messageSuccess = new GroupsContainerSuccess.MessageSuccess();
+                            GroupsContainerSuccess.MessageSuccess2 messageSuccess = new GroupsContainerSuccess.MessageSuccess2();
                             messageSuccess.Success = true;
-                            messageSuccess.Message = message;
+                            GroupsContainerObjectified.Message2 realMessage = new GroupsContainerObjectified.Message2();
+                            realMessage.Id = message.Id;
+                            realMessage.Content = message.Content;
+                            realMessage.Author = new GroupsContainerObjectified.Author();
+                            realMessage.Author.Id = message.Author;
+                            realMessage.Author.Username = users.ToList().Find(x => x.Id == realMessage.Author.Id)?.Username ?? "Deleted User";
+                            realMessage.Author.Usernumber = users.ToList().Find(x => x.Id == realMessage.Author.Id)?.Usernumber ?? "0000";
+                            messageSuccess.Message = realMessage;
                             return Ok(messageSuccess);
                         }
                         else
