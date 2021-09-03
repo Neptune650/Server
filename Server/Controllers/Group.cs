@@ -49,7 +49,6 @@ namespace Server.Controllers
                         chats2.Add(chat);
                     });
                     groupSuccess.Chats = chats2;
-                    groupSuccess.Members = JsonConvert.DeserializeObject<List<string>>(group.Members);
                     return Ok(groupSuccess);
                 }
                 else
@@ -106,7 +105,6 @@ namespace Server.Controllers
                     group.Name = groupObjectified.Name;
                     group.Owner = groupObjectified.Owner;
                     group.Chats = JsonConvert.SerializeObject(groupObjectified.Chats);
-                    group.Members = JsonConvert.SerializeObject(groupObjectified.Members);
                     Program.db.Insert(group);
 
                     List<string> groups = JsonConvert.DeserializeObject<List<string>>(user.Groups);
@@ -132,7 +130,6 @@ namespace Server.Controllers
                         chats2.Add(chat);
                     });
                     groupSuccess.Chats = chats2;
-                    groupSuccess.Members = JsonConvert.DeserializeObject<List<string>>(group.Members);
 
                     return Ok(groupSuccess);
                 }
@@ -187,7 +184,6 @@ namespace Server.Controllers
                             groupSuccess.Name = group.Name;
                             groupSuccess.Owner = group.Owner;
                             groupSuccess.Chats = JsonConvert.DeserializeObject<List<GroupsContainerSuccess.Chat>>(group.Chats);
-                            groupSuccess.Members = JsonConvert.DeserializeObject<List<string>>(group.Members);
 
                         WebsocketObject7Container.Groups websocketObject = new WebsocketObject7Container.Groups();
                         websocketObject.Id = group.Id;
@@ -248,7 +244,6 @@ namespace Server.Controllers
                     groupObjectified.Name = group.Name;
                     groupObjectified.Owner = group.Owner;
                     groupObjectified.Chats = JsonConvert.DeserializeObject<List<GroupsContainerObjectified.Chat>>(group.Chats);
-                    groupObjectified.Members = JsonConvert.DeserializeObject<List<string>>(group.Members);
 
                     WebsocketObject8Container.Groups websocketObject = new WebsocketObject8Container.Groups();
                     websocketObject.Id = group.Id;
@@ -336,9 +331,6 @@ namespace Server.Controllers
                     Program.db.Update(user);
                     var groups = Program.db.Table<GroupsContainer.Groups>();
                     GroupsContainer.Groups group = groups.ToList().Find(x => x.Id == id);
-                    List<string> members = JsonConvert.DeserializeObject<List<string>>(group.Members);
-                    members.Remove(user.Id);
-                    group.Members = JsonConvert.SerializeObject(members);
                     Program.db.Update(group);
 
                     GroupsContainerSuccess.Groups groupSuccess = new GroupsContainerSuccess.Groups();
@@ -355,7 +347,6 @@ namespace Server.Controllers
                         chats2.Add(chat);
                     });
                     groupSuccess.Chats = chats2;
-                    groupSuccess.Members = JsonConvert.DeserializeObject<List<string>>(group.Members);
 
                     WebsocketObject8Container.Groups websocketObject = new WebsocketObject8Container.Groups();
                     websocketObject.Id = group.Id;
