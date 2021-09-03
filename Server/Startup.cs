@@ -35,9 +35,10 @@ namespace Server
             {
                 options.AddPolicy(name: CORS, builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder.SetIsOriginAllowed(thing => true)
                            .AllowAnyHeader()
-                           .AllowAnyMethod();
+                           .AllowAnyMethod()
+                           .AllowCredentials();
                 });
             });
             services.AddControllers();

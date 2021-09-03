@@ -37,7 +37,6 @@ public class GroupsContainer
         public string Name { get; set; }
         public string Owner { get; set; }
         public string Chats { get; set; }
-        public string Members { get; set; }
     }
 }
 
@@ -246,7 +245,7 @@ public class nPIUserContainer
         public string Email { get; set; }
         public string Username { get; set; }
         public string Usernumber { get; set; }
-        public List<string> Groups { get; set; }
+        public List<GroupsContainerObjectified.Groups> Groups { get; set; }
     }
 }
 

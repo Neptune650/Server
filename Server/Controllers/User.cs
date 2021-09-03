@@ -23,6 +23,7 @@ namespace Server.Controllers
             Request.Headers.TryGetValue("Authorization", out tokenPre);
             string token = tokenPre.ToString();
             var users = Program.db.Table<UsersContainer.Users>();
+            var groups = Program.db.Table<GroupsContainer.Groups>();
             nPIUserContainer.Users user = new nPIUserContainer.Users();
             UsersContainer.Users userInside = users.ToList().Find(x => x.Token == token);
                 if(userInside?.Token == token)
@@ -32,7 +33,17 @@ namespace Server.Controllers
                     user.Email = userInside.Email;
                     user.Username = userInside.Username;
                     user.Usernumber = userInside.Usernumber;
-                    user.Groups = JsonConvert.DeserializeObject<List<string>>(userInside.Groups);
+                List<GroupsContainerObjectified.Groups> realGroups = new List<GroupsContainerObjectified.Groups>();
+                JsonConvert.DeserializeObject<List<string>>(userInside.Groups).ForEach(groupId => {
+                    GroupsContainer.Groups group = groups.ToList().Find(x => x.Id == groupId);
+                    GroupsContainerObjectified.Groups realGroup = new GroupsContainerObjectified.Groups();
+                    realGroup.Id = group.Id;
+                    realGroup.Name = group.Name;
+                    realGroup.Owner = group.Owner;
+                    realGroup.Chats = JsonConvert.DeserializeObject<List<GroupsContainerObjectified.Chat>>(group.Chats);
+                    realGroups.Add(realGroup);
+                });
+                    user.Groups = realGroups;
                 return Ok(user);
 
             } else
@@ -102,6 +113,7 @@ namespace Server.Controllers
             Request.Headers.TryGetValue("Usernumber", out usernumberPre);
             string usernumber = usernumberPre.ToString();
             var users = Program.db.Table<UsersContainer.Users>();
+            var groups = Program.db.Table<GroupsContainer.Groups>();
             UsersContainer.Users user = users.ToList().Find(x => x.Token == token);
             if (!String.IsNullOrEmpty(user?.Id))
             {
@@ -136,8 +148,18 @@ namespace Server.Controllers
                         nPIUser.Email = user.Email;
                         nPIUser.Username = user.Username;
                         nPIUser.Usernumber = user.Usernumber;
-                        nPIUser.Groups = JsonConvert.DeserializeObject<List<string>>(user.Groups);
-                        return Ok(nPIUser);
+                    List<GroupsContainerObjectified.Groups> realGroups = new List<GroupsContainerObjectified.Groups>();
+                    JsonConvert.DeserializeObject<List<string>>(user.Groups).ForEach(groupId => {
+                        GroupsContainer.Groups group = groups.ToList().Find(x => x.Id == groupId);
+                        GroupsContainerObjectified.Groups realGroup = new GroupsContainerObjectified.Groups();
+                        realGroup.Id = group.Id;
+                        realGroup.Name = group.Name;
+                        realGroup.Owner = group.Owner;
+                        realGroup.Chats = JsonConvert.DeserializeObject<List<GroupsContainerObjectified.Chat>>(group.Chats);
+                        realGroups.Add(realGroup);
+                    });
+                    nPIUser.Groups = realGroups;
+                    return Ok(nPIUser);
                     } else
                     {
                         return Unauthorized(new Dictionary<string, object>{
@@ -164,6 +186,7 @@ namespace Server.Controllers
             Request.Headers.TryGetValue("Authorization", out tokenPre);
             string token = tokenPre.ToString();
             var users = Program.db.Table<UsersContainer.Users>();
+            var groups = Program.db.Table<GroupsContainer.Groups>();
             UsersContainer.Users userInside = users.ToList().Find(x => x.Token == token);
             nPIUserContainer.Users user = new nPIUserContainer.Users();
             if (!String.IsNullOrEmpty(userInside?.Id))
@@ -173,7 +196,17 @@ namespace Server.Controllers
                 user.Email = userInside.Email;
                 user.Username = userInside.Username;
                 user.Usernumber = userInside.Usernumber;
-                user.Groups = JsonConvert.DeserializeObject<List<string>>(userInside.Groups);
+                List<GroupsContainerObjectified.Groups> realGroups = new List<GroupsContainerObjectified.Groups>();
+                JsonConvert.DeserializeObject<List<string>>(userInside.Groups).ForEach(groupId => {
+                    GroupsContainer.Groups group = groups.ToList().Find(x => x.Id == groupId);
+                    GroupsContainerObjectified.Groups realGroup = new GroupsContainerObjectified.Groups();
+                    realGroup.Id = group.Id;
+                    realGroup.Name = group.Name;
+                    realGroup.Owner = group.Owner;
+                    realGroup.Chats = JsonConvert.DeserializeObject<List<GroupsContainerObjectified.Chat>>(group.Chats);
+                    realGroups.Add(realGroup);
+                });
+                user.Groups = realGroups;
                 Program.db.Delete<UsersContainer.Users>(token);
                 return Ok(user);
             }

@@ -79,9 +79,6 @@ namespace Server.Controllers
                         Program.db.Update(user);
                         var groups = Program.db.Table<GroupsContainer.Groups>();
                         GroupsContainer.Groups group = groups.ToList().Find(x => x.Id == id);
-                        List<string> members = JsonConvert.DeserializeObject<List<string>>(group.Members);
-                        members.Add(user.Id);
-                        group.Members = JsonConvert.SerializeObject(members);
                         Program.db.Update(group);
 
                         GroupsContainerSuccess.Groups groupSuccess = new GroupsContainerSuccess.Groups();
@@ -98,7 +95,6 @@ namespace Server.Controllers
                             chats2.Add(chat);
                         });
                         groupSuccess.Chats = chats2;
-                        groupSuccess.Members = JsonConvert.DeserializeObject<List<string>>(group.Members);
 
                         WebsocketObject6Container.Groups websocketObject = new WebsocketObject6Container.Groups();
                         websocketObject.Id = group.Id;

@@ -116,7 +116,7 @@ namespace Server.Controllers
                 var groups = Program.db.Table<GroupsContainer.Groups>();
                 GroupsContainer.Groups group = groups.ToList().Find(x => x.Id == gid);
                 GroupsContainerObjectified.Chat chat = JsonConvert.DeserializeObject<List<GroupsContainerObjectified.Chat>>(group?.Chats ?? "[{}]")?.Find(x => x.Id == cid);
-                if (!String.IsNullOrEmpty(chat?.Id) && !String.IsNullOrEmpty(message) && message.Length < 31)
+                if (!String.IsNullOrEmpty(chat?.Id) && !String.IsNullOrEmpty(message) && message.Length < 1000)
                 {
                     List<GroupsContainerObjectified.Chat> chats = JsonConvert.DeserializeObject<List<GroupsContainerObjectified.Chat>>(group.Chats);
                     GroupsContainerObjectified.Message messageObject = new GroupsContainerObjectified.Message();
@@ -180,7 +180,7 @@ namespace Server.Controllers
                 GroupsContainer.Groups group = groups.ToList().Find(x => x.Id == gid);
                 GroupsContainerObjectified.Chat chat = JsonConvert.DeserializeObject<List<GroupsContainerObjectified.Chat>>(group?.Chats ?? "[{}]")?.Find(x => x.Id == cid);
                 GroupsContainerObjectified.Message messageObject = chat.Messages.Find(x => x.Id == mid);
-                if (!String.IsNullOrEmpty(message) && !String.IsNullOrEmpty(chat?.Id) && !String.IsNullOrEmpty(messageObject?.Id) )
+                if (!String.IsNullOrEmpty(message) && !String.IsNullOrEmpty(chat?.Id) && !String.IsNullOrEmpty(messageObject?.Id) && message.Length < 1000)
                 {
                     List<GroupsContainerObjectified.Chat> chats = JsonConvert.DeserializeObject<List<GroupsContainerObjectified.Chat>>(group.Chats);
                     GroupsContainerObjectified.Message messageThingy = chats[chats.FindIndex(x => x.Id == cid)].Messages[chats[chats.FindIndex(x => x.Id == cid)].Messages.FindIndex(x => x.Id == mid)];
